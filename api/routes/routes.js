@@ -1,3 +1,5 @@
+// Export api routes
+
 module.exports = function(app) {
 	var fileController = require('./../controllers/fileController');
 	app.route('/api/files').get(fileController.getAllFiles).post(fileController.createFiles);

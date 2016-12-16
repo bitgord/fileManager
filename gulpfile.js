@@ -1,4 +1,5 @@
-var gulp = require('gulp'),							// Taskmanager
+var gulp = require('gulp'),	                // Taskmanager
+  nodemon = require('gulp-nodemon'),						
   concat = require('gulp-concat'),					// Puts into one file
   fs = require('fs'),								// Shows an error if file is not found
   del = require('del'),								// Removes the folder
@@ -7,6 +8,7 @@ var gulp = require('gulp'),							// Taskmanager
   connect = require('gulp-connect'),				// Helps to run server
   jshint = require('gulp-jshint');					// Makes sure that all javascript rules are followed
 
+// Scripts and styles
 var filePaths = {
  scripts: ['bower_components/jquery/dist/jquery.js',
     'bower_components/angular/angular.js',
@@ -14,10 +16,7 @@ var filePaths = {
     'bower_components/angular-ui-router/release/angular-ui-router.js',
     'app/components/**/**/*.js'
     ],
-
-  // images: 'app/assets/img/*',
-
-  styles: ['bower_components/bootstrap/dist/css/bootstrap.css',
+ styles: ['bower_components/bootstrap/dist/css/bootstrap.css',
     'app/styles/**/*.css'],
 
 };
@@ -32,12 +31,22 @@ var validateResources = function (resources) {
 }
 
 
-//clean
+// clean
 gulp.task('clean', function(cb) {
   del(['app/lib'], cb);
 });
 
-//Copy styles
+// Start Nodemon
+gulp.task('start', function () {
+  nodemon({
+    script: 'server.js',
+    tasks: ['watch'],
+    ext: 'js html', env: { 'NODE_ENV': 'development' }
+  })
+})
+
+
+// Copy styles
 gulp.task('styles', function(){
   validateResources(filePaths.styles);
   return gulp.src(filePaths.styles)
@@ -46,7 +55,7 @@ gulp.task('styles', function(){
   .pipe(gulp.dest('app/lib/css'))
 })
 
-// Copy Scripts
+// Copy Scripts into dest file
 gulp.task('scripts', function() {
 
   validateResources(filePaths.scripts);
@@ -57,7 +66,7 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('app/lib/js'))
 });
 
-//server connection
+// Server connection
 gulp.task('connect', function(){
   connect.server({
     livereload:true,
@@ -92,7 +101,7 @@ gulp.task('watch', function() {
 
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['clean', 'scripts', 'watch', 'connect'], function() {
+gulp.task('default', ['clean', 'scripts', 'start'], function() {
     gulp.start('scripts', 'styles');
 });
 

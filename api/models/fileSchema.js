@@ -1,7 +1,12 @@
+// Create fileSchema model
+
+// Require mongoose to connect to db
 var mongoose = require('mongoose');
 
+// Create schama instance, save variable
 var schema = mongoose.Schema;
 
+// Create new schema called FileSchema with the fields below
 var FileSchema = new schema({
 	date: {
 		type: Date,
@@ -23,12 +28,8 @@ var FileSchema = new schema({
 		type: String,
 		required: 'Expense description not Found'
 	},
-	preTax: {
-		type: Number,
-		required: 'Pre-tax not Found'
-	},
 	preTaxAmount: {
-		type: Number,
+		type: String,								// Needs to be number, string.replace
 		required: 'Pre-tax amount not Found'
 	},
 	taxName: {
@@ -36,9 +37,10 @@ var FileSchema = new schema({
 		required: 'Tax name not Found'
 	},
 	taxAmount: {
-		type: Number,
+		type: String,								// Needs to be number, string.replace
 		required: 'Tax Amout not Found'
 	}
 })
 
+// Export the model to be used in app
 module.exports = mongoose.model('File', FileSchema);

@@ -17,7 +17,7 @@ var filePaths = {
     'app/components/**/**/*.js'
     ],
  styles: ['bower_components/bootstrap/dist/css/bootstrap.css',
-    'app/styles/**/*.css'],
+    'app/styles/*.css'],
 
 };
 

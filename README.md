@@ -55,11 +55,6 @@ Move into fileUploads database which should be created after you run your app if
 Query database to find all the files that have been uploaded<code>db.files.find().pretty()</code><br>
 Clear database<code>db.files.remove({})</code>
 
-#Accomplishment
-This was my first project that required storing a csv file upload and I am most proud of figuring out how to do this. After some research I discovered the npm tool csvtojson, which proved to be incredibly helpful in solving the file upload part of the application. I am also proud of the gulpfile build integration, which will help with scaling the application moving forward. <br><br>
-
-The next two steps to develop the application is to change the fileSchema to allow for numbers and other dataTypes to be stored in the database. This would enable the columns to be added to calculate the total expenses amount per-month. In addition, mocha should be configured to enable a test-driven development environment. Once this integration is setup, we could add in an authentication layer so only registered users would be able to upload files to the database. We could gather analytics using the total expenses amoung per month and present the change over time in a chart using a tool like d3.js. A way to innovate even farther would be to store certain data onto the blockchain to guarantee it has not been altered. 
-
 #Todo
 Change pretax and tax amount to be a number instead of a string<br>
 Calculate total expenses amount per-month based on data
